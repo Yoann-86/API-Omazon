@@ -1,0 +1,39 @@
+@endpoint=http://localhost:3000/api
+
+GET {{endpoint}}/products/
+
+###
+
+GET {{endpoint}}/products/?id=66f756cf3f64ead112967bbc
+
+###
+
+POST {{endpoint}}/products/
+Content-Type: application/json
+
+{
+  "title": "string",
+  "price": 12,
+  "image": "string",
+  "description": "string"
+}
+
+###
+
+PUT {{endpoint}}/products/66f743678b4ebe8cb745c59a
+Content-Type: application/json
+
+{
+  "title": "number",
+  "price": 11,
+  "image": "number",
+  "description": "number"
+}
+
+###
+
+DELETE {{endpoint}}/products/66f739fd88022011fa3ff602
+
+###
+PATCH {{endpoint}}/products/66f743678b4ebe8cb745c59a
+# Could return 405 Method Not Allowed
