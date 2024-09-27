@@ -1,6 +1,6 @@
 //
 db.createCollection("products");
-db.products.insert([
+db.products.insertMany([
   {
     title:
       "Trixie Frisbee Caoutchouc Naturel 22 cm pour Chien, Coloris aléatoire",
