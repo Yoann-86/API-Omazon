@@ -2,10 +2,12 @@
   "name": "API-Omazon",
   "version": "1.0.0",
   "description": "Restfull API for Omazon",
-  "main": "app.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "DEBUG=* ts-node-dev --respawn src/app.ts",
-    "start": "ts-node src/app.ts",
+    "dev": "DEBUG=main:* ts-node-dev --respawn src/index.ts",
+    "start": "ts-node src/index.ts",
+    "run:docker": "mkdir data && docker-compose up --build",
+    "stop:docker": "rm -rf data && docker-compose down",
     "test": "jest"
   },
   "keywords": [],

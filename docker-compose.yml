@@ -1,0 +1,38 @@
+services:
+  api:
+    container_name: omazon-api
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:3000"
+    environment:
+      - DB_URI=${DB_URI}
+    volumes:
+      - .:/app
+    networks:
+      - omazon-network
+    depends_on:
+      - mongo-db
+
+  mongo-db:
+    image: mongo:latest
+    container_name: omazon-mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    environment: 
+      MONGO_INITDB_DATABASE: omazon-db
+    volumes:
+      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./init-database.js:/docker-entrypoint-initdb.d/init-database.js:ro
+      - ./data:/data/db
+    command: ["mongod", "--config", "/etc/mongo/mongod.conf"]
+    networks:
+      - omazon-network
+
+networks:
+  omazon-network:
+    driver: bridge
