@@ -1,6 +1,6 @@
 @endpoint=http://localhost:3000/api
 
-GET {{endpoint}}/products/
+GET {{endpoint}}/products
 
 ###
 
@@ -8,7 +8,7 @@ GET {{endpoint}}/products/?id=66f756cf3f64ead112967bbc
 
 ###
 
-POST {{endpoint}}/products/
+POST {{endpoint}}/products
 Content-Type: application/json
 
 {
@@ -40,9 +40,24 @@ PATCH {{endpoint}}/products/66f743678b4ebe8cb745c59a
 
 ### TAG ###
 
-GET {{endpoint}}/tags/
+GET {{endpoint}}/tags
 
 ###
-POST {{endpoint}}/tags/
+POST {{endpoint}}/tags
 # Could return 405 Method Not Allowed
 
+###
+POST {{endpoint}}/tags/66f743678b4ebe8cb745c59a
+# Could return 405 Method Not Allowed
+
+### CATEGORY ###
+
+GET {{endpoint}}/categories
+
+###
+POST {{endpoint}}/categories
+# Could return 405 Method Not Allowed
+
+###
+POST {{endpoint}}/categories/66f7661cdcde0ab612892b5c
+# Could return 405 Method Not Allowed

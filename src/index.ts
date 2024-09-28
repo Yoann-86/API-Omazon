@@ -11,6 +11,7 @@ const ALLOWED_DOMAINS = process.env.ALLOWED_DOMAINS;
 const log = debug("main:server");
 
 app.use(cors({ origin: ALLOWED_DOMAINS }));
+app.use(express.static("./public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

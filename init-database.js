@@ -1,5 +1,8 @@
-//
-db.createCollection("products");
+// script to initialize the database with some data
+import debug from "debug";
+const log = debug("main:init-database");
+// Create the products collection
+db.createCollection("product");
 db.products.insertMany([
   {
     title:
@@ -317,3 +320,72 @@ db.products.insertMany([
     tagId: 2,
   },
 ]);
+log("Products collection created and filled");
+
+// Create categories collection
+db.createCollection("category");
+db.category.insertMany([
+  {
+    title: "Animalerie",
+    slug: "animalerie",
+    image: "pictures/categories/animalerie.webp",
+  },
+  {
+    title: "Beauté et parfum",
+    slug: "beaute-et-parfum",
+    image: "pictures/categories/beaute-et-parfum.webp",
+  },
+  {
+    title: "Bricolage",
+    slug: "bricolage",
+    image: "pictures/categories/bricolage.webp",
+  },
+  {
+    title: "Chaussures",
+    slug: "chaussures",
+    image: "pictures/categories/chaussures.webp",
+  },
+  {
+    title: "Jardin",
+    slug: "jardin",
+    image: "pictures/categories/jardin.webp",
+  },
+  {
+    title: "Jeux vidéos",
+    slug: "jeux-videos",
+    image: "pictures/categories/jeux-videos.webp",
+  },
+  {
+    title: "Livre",
+    slug: "livre",
+    image: "pictures/categories/livre.webp",
+  },
+  {
+    title: "Jeux et loisirs",
+    slug: "jeux",
+    image: "pictures/categories/jeux.webp",
+  },
+]);
+log("Categories collection created and filled");
+
+// Create tags collection
+db.createCollection("tag");
+db.tag.insertMany([
+  {
+    type: "choice",
+    text: "Choix <span>d'Omazon<span>",
+  },
+  {
+    type: "new",
+    text: "Nouveauté",
+  },
+  {
+    type: "best-seller",
+    text: "N°1 des ventes",
+  },
+  {
+    type: "flash",
+    text: "Vente flash",
+  },
+]);
+log("Tags collection created and filled");

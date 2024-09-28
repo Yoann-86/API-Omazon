@@ -72,10 +72,22 @@ const tagController = {
     //   .json({ status: "error", message: "Tag not deleted" });
   },
 
-  methodNotAllowed(req: Request, res: Response) {
-    return res
-      .status(405)
-      .json({ status: "error", message: "Method not allowed", allow: ["GET"] });
+  methodNotAllowed(_: Request, res: Response) {
+    return res.status(405).json({
+      status: "error",
+      message: "Method not allowed",
+      path: "api/tags",
+      allow: ["GET"],
+    });
+  },
+
+  methodNotAllowedParams(_: Request, res: Response) {
+    return res.status(405).json({
+      status: "error",
+      message: "Method not allowed",
+      path: "api/tags/:params",
+      allow: "none",
+    });
   },
 };
 
