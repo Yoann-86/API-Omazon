@@ -96,11 +96,11 @@ const productController = {
       .json({ status: "error", message: "Product not deleted" });
   },
 
-  patch(req: Request, res: Response) {
+  methodNotAllowed(req: Request, res: Response) {
     return res.status(405).json({
       status: "error",
       message: "Method not allowed",
-      allow: "PUT, DELETE",
+      allow: ["PUT", "DELETE"],
     });
   },
 };

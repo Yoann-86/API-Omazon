@@ -37,3 +37,12 @@ DELETE {{endpoint}}/products/66f739fd88022011fa3ff602
 ###
 PATCH {{endpoint}}/products/66f743678b4ebe8cb745c59a
 # Could return 405 Method Not Allowed
+
+### TAG ###
+
+GET {{endpoint}}/tags/
+
+###
+POST {{endpoint}}/tags/
+# Could return 405 Method Not Allowed
+
