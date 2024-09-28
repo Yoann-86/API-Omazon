@@ -10,3 +10,8 @@ router.use("/tags", tagRoutes);
 router.use("/categories", categoryRoutes);
 
 export default router;
+
+// router.get("/pictures/:slug", (req, res) => {
+//   const slug = req.params.slug;
+// res.sendFile("/path/to/pictures/");
+//});
