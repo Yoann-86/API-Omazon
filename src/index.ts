@@ -18,5 +18,5 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 app.listen(PORT, () => {
-  log(`[🚀] - Server is running on http://localhost:${PORT}`);
+  log(`[🔥🔥] - Server is burning on http://localhost:${PORT} 🚀`);
 });

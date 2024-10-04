@@ -1,5 +1,7 @@
 @endpoint=http://localhost:3000/api
 
+### PRODUCT ###
+
 GET {{endpoint}}/products
 
 ###
@@ -61,3 +63,16 @@ POST {{endpoint}}/categories
 ###
 POST {{endpoint}}/categories/66f7661cdcde0ab612892b5c
 # Could return 405 Method Not Allowed
+
+### USER ###
+
+GET {{endpoint}}/user
+Content-Type: application/json
+  
+  {
+    "email": "string",
+    "password": "string"
+  }
+
+###
+
