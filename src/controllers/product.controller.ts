@@ -72,8 +72,13 @@ const productController = {
     const id = req.params.id;
 
     try {
-      const product = Product.updateOne({ id }, req.body);
-      return res.status(200).json({ status: "success", data: { product } });
+      console.log({ id }, req.body);
+
+      const product = await Product.updateOne({ id }, req.body);
+      console.log({ product });
+      return res
+        .status(204)
+        .json({ status: "success", message: "Product updated" });
     } catch (error) {
       return res
         .status(500)
@@ -83,17 +88,22 @@ const productController = {
 
   async deleteProduct(req: Request, res: Response) {
     const id = req.params.id;
-    const result = await Product.deleteOne({ _id: id });
 
-    if (result.deletedCount) {
+    try {
+      const result = await Product.deleteOne({ _id: id });
+
+      if (result.deletedCount) {
+        return res.status(204);
+      }
+
       return res
-        .status(204)
-        .json({ status: "success", message: "Product deleted" });
+        .status(404)
+        .json({ status: "error", message: "Product not found" });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "error", message: "Product not deleted" });
     }
-
-    return res
-      .status(404)
-      .json({ status: "error", message: "Product not deleted" });
   },
 
   methodNotAllowed(req: Request, res: Response) {

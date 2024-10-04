@@ -38,3 +38,28 @@ const productSchema = new mongoose.Schema(
 const Product = mongoose.model("Product", productSchema);
 
 export default Product;
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *           description: The name of the product.
+ *           example: "The Legend of Zelda : Tears of the Kingdom"
+ *         price:
+ *           type: number
+ *           description: The price of the product.
+ *           example: 51.49
+ *         image:
+ *           type: string
+ *           description: The name of the product.
+ *           example: "zelda-totk"
+ *         description:
+ *           type: string
+ *           description: The name of the product.
+ *           example: "Faites le grand saut : la suite de l’aventure en monde ouvert acclamée par la critique vous attend ."
+ */

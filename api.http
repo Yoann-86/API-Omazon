@@ -93,5 +93,5 @@ Content-Type: application/json
   
   {
     "email": "fake.user@email.com",
-    "password": "qwerty"
+    "password": "azerty"
   }
