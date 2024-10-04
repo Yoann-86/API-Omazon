@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{endpoint}}/products/66f743678b4ebe8cb745c59a
+PUT {{endpoint}}/products/66fffddd047519bb53e888e7
 Content-Type: application/json
 
 {
