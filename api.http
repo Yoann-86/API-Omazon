@@ -70,9 +70,18 @@ GET {{endpoint}}/user
 Content-Type: application/json
   
   {
-    "email": "string",
-    "password": "string"
+    "email": "fake.user@email.com",
+    "password": "azerty"
   }
 
 ###
 
+POST {{endpoint}}/user
+Content-Type: application/json
+
+{
+  "firstname": "fake",
+  "lastname": "user",
+  "email": "fake.user@email.com",
+  "password": "azerty"
+}

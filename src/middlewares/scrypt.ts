@@ -28,8 +28,13 @@ export async function verifyPassword(
   }
   try {
     const [hash, salt] = hashedPassword.split(".");
+    if (!hash || !salt) {
+      throw new Error("Invalid hashed password");
+    }
+
     const buffer = (await scryptAsync(password, salt, KEY_LENGTH)) as Buffer;
-    return timingSafeEqual(Buffer.from(hash), buffer);
+
+    return timingSafeEqual(Buffer.from(hash, "hex"), buffer);
   } catch (error) {
     throw new Error("Error verifying password");
   }

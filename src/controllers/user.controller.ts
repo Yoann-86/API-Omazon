@@ -3,6 +3,10 @@ import { User } from "../models";
 import { hashPassword, verifyPassword } from "../middlewares/scrypt";
 
 const userController = {
+  async getAll(req: Request, res: Response) {
+    const users = await User.find();
+    res.status(200).json({ status: "success", data: users });
+  },
   async getUser(req: Request, res: Response) {
     if (!req.body.email || !req.body.password) {
       return res
@@ -16,7 +20,7 @@ const userController = {
     });
 
     const verifiedPassword =
-      user && (await verifyPassword(password, user.password));
+      user && (await verifyPassword(user.password, password));
 
     if (!verifiedPassword || !user) {
       return res
@@ -29,6 +33,7 @@ const userController = {
 
   async createUser(req: Request, res: Response) {
     const { firstname, lastname, email, password } = req.body;
+
     if (!firstname || !lastname || !email || !password) {
       return res
         .status(400)
@@ -40,7 +45,7 @@ const userController = {
       firstname,
       lastname,
       email,
-      hashedPassword,
+      password: hashedPassword,
     });
 
     const newUser = await user.save();
@@ -91,15 +96,6 @@ const userController = {
       message: "Method not allowed",
       path: "api/users",
       allow: ["GET", "POST"],
-    });
-  },
-
-  methodNotAllowedParams(_: Request, res: Response) {
-    return res.status(405).json({
-      status: "error",
-      message: "Method not allowed",
-      path: "api/users/:params",
-      allow: "none",
     });
   },
 };
