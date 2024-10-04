@@ -87,24 +87,42 @@ const userController = {
   },
 
   async deleteUser(req: Request, res: Response) {
-    // const id = req.params.id;
-    // const result = await User.deleteOne({ _id: id });
-    // if (result.deletedCount) {
-    //   return res
-    //     .status(204)
-    //     .json({ status: "success", message: "User deleted" });
-    // }
-    // return res
-    //   .status(404)
-    //   .json({ status: "error", message: "User not deleted" });
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Invalid input" });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "User not found" });
+    }
+    const verifiedPassword = await verifyPassword(user.password, password);
+    if (!verifiedPassword) {
+      return res
+        .status(401)
+        .json({ status: "error", message: "Invalid password" });
+    }
+
+    const result = await User.deleteOne({ email });
+    if (result.deletedCount) {
+      return res
+        .status(204)
+        .json({ status: "success", message: "User deleted" });
+    }
+    return res
+      .status(404)
+      .json({ status: "error", message: "User not deleted" });
   },
 
   methodNotAllowed(_: Request, res: Response) {
     return res.status(405).json({
       status: "error",
       message: "Method not allowed",
-      path: "api/users",
-      allow: ["GET", "POST"],
+      path: "api/user",
+      allow: ["GET", "POST", "DELETE"],
     });
   },
 };

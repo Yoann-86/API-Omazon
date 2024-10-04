@@ -85,3 +85,13 @@ Content-Type: application/json
   "email": "fake.user@email.com",
   "password": "azerty"
 }
+
+###
+
+DELETE {{endpoint}}/user
+Content-Type: application/json
+  
+  {
+    "email": "fake.user@email.com",
+    "password": "qwerty"
+  }
