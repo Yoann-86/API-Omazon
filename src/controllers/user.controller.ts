@@ -3,10 +3,12 @@ import { User } from "../models";
 import { hashPassword, verifyPassword } from "../middlewares/scrypt";
 
 const userController = {
+  // API Admin route
   async getAll(req: Request, res: Response) {
     const users = await User.find();
     res.status(200).json({ status: "success", data: users });
   },
+
   async getUser(req: Request, res: Response) {
     if (!req.body.email || !req.body.password) {
       return res
@@ -38,6 +40,13 @@ const userController = {
       return res
         .status(400)
         .json({ status: "error", message: "Invalid input" });
+    }
+
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res
+        .status(409)
+        .json({ status: "error", message: "User already exists" });
     }
     const hashedPassword = await hashPassword(password);
 
