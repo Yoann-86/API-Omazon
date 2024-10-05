@@ -4,7 +4,11 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
+<<<<<<< Updated upstream
 COPY ./package.json ./package-lock.json ./
+=======
+COPY ./src/package.json ./src/package-lock.json ./
+>>>>>>> Stashed changes
 
 RUN npm install --omit=dev
 
