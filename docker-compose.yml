@@ -3,19 +3,23 @@ services:
     container_name: omazon-api
     build:
       context: .
-      dockerfile: ./src/Dockerfile
+      dockerfile: ./src/Dockerfile.api
     env_file:
-      - .env
+      - .env.production
     ports:
-      - "${PORT}:3000"
+      - "3000:3000"
+    restart: always
     environment:
       - DB_URI=${DB_URI}
-    volumes:
-      - .:/app
     networks:
       - omazon-network
     depends_on:
       - mongo-db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mongo-db:
     image: mongo:latest
@@ -26,13 +30,22 @@ services:
     environment: 
       MONGO_INITDB_DATABASE: omazon-db
     volumes:
-      - ./mongod.conf:/etc/mongo/mongod.conf
+      - ./mongod.conf:/etc/mongo/mongod.conf:ro
       - ./init-database.js:/docker-entrypoint-initdb.d/init-database.js:ro
-      - ./data:/data/db
+      - mongo-data:/data/db
     command: ["mongod", "--config", "/etc/mongo/mongod.conf"]
     networks:
       - omazon-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   omazon-network:
     driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
