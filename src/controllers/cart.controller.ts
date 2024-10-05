@@ -74,6 +74,43 @@ const cartController = {
       .json({ status: "success", message: "Product added to cart" });
   },
 
+  async removeFromCart(req: Request, res: Response) {
+    const { userId, productId, deleteAll } = req.body;
+
+    const user = await User.findOne({ id: userId });
+    const product = await Product.findOne({ id: productId });
+
+    if (!user || !product) {
+      return res.status(404).json({
+        status: "error",
+        message: "User or product not found",
+      });
+    }
+
+    if (!deleteAll) {
+      // Remove only one product
+      const cart = await Cart.findOne({ owner: user.email });
+
+      if (cart) {
+        const productIndex = cart.products.indexOf(product);
+
+        cart.products.splice(productIndex, 1);
+
+        await cart.save();
+      }
+    } else {
+      // Remove all products
+      const cart = await Cart.findOneAndUpdate(
+        { owner: user.email },
+        { $pull: { products: product } },
+      );
+    }
+
+    return res
+      .status(204)
+      .json({ status: "success", message: "Product deleted from the cart" });
+  },
+
   methodNotAllowed(_: Request, res: Response) {
     return res.status(405).json({
       status: "error",

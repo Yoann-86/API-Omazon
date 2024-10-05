@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/", cartController.getOneCart);
 router.post("/", cartController.addToCart);
+router.put("/", cartController.removeFromCart);
 router.all("/", cartController.methodNotAllowed);
 router.all("/:id", cartController.methodNotAllowedParams);
 
