@@ -32,6 +32,9 @@ importers:
       swagger-ui-express:
         specifier: ^5.0.1
         version: 5.0.1(express@4.21.0)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.2
@@ -72,9 +75,6 @@ importers:
       ts-node-dev:
         specifier: ^2.0.0
         version: 2.0.0(@types/node@22.5.5)(typescript@5.6.2)
-      typescript:
-        specifier: ^5.6.2
-        version: 5.6.2
 
 packages:
 
