@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema(
   {
+    id: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -32,6 +36,11 @@ export default Category;
  *     Category:
  *       type: object
  *       properties:
+ *         id:
+ *           type: number
+ *           unique: true
+ *           description: The reference of the category.
+ *           example: 7
  *         title:
  *           type: string
  *           description: The name of the category.

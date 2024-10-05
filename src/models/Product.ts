@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
+    id: {
+      type: Number,
+      required: true,
+      unique: true,
+    },
     title: {
       type: String,
       required: true,
@@ -19,12 +24,12 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Number,
       ref: "Category",
       // required: true,
     },
     tagId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Number,
       ref: "Tag",
       required: false,
     },
@@ -62,4 +67,12 @@ export default Product;
  *           type: string
  *           description: The name of the product.
  *           example: "Faites le grand saut : la suite de l’aventure en monde ouvert acclamée par la critique vous attend ."
+ *         categoryId:
+ *           type: number
+ *           description: The id of the category of the product.
+ *           example: 7
+ *         tagId:
+ *           type: number
+ *           description: The tag of the product.
+ *           example: 0
  */

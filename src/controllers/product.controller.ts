@@ -16,6 +16,7 @@ const productController = {
 
     const products = (await Product.find()) as IProduct[];
     if (products) {
+      console.log({ products });
       return res.status(200).json({ status: "success", data: { products } });
     }
 

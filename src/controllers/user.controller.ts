@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { User } from "../models";
 import { hashPassword, verifyPassword } from "../middlewares/scrypt";
+import { generateToken } from "../middlewares/jwt";
 
 const userController = {
   // API Admin route
@@ -9,28 +10,43 @@ const userController = {
     res.status(200).json({ status: "success", data: users });
   },
 
-  async getUser(req: Request, res: Response) {
-    if (!req.body.email || !req.body.password) {
+  async loginUser(req: Request, res: Response) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       return res
         .status(400)
         .json({ status: "error", message: "Invalid input" });
     }
 
-    const { email, password } = req.body;
-    const user = await User.findOne({
-      email,
-    });
+    const user = await User.findOne({ email });
 
     const verifiedPassword =
       user && (await verifyPassword(user.password, password));
-
-    if (!verifiedPassword || !user) {
+    if (!user || !verifiedPassword) {
       return res
-        .status(401)
+        .status(400)
         .json({ status: "error", message: "Invalid email or password" });
     }
 
-    return res.status(200).json({ status: "success", data: { user } });
+    const { firstname, lastname, id } = user;
+    const generatedToken = await generateToken({
+      firstname,
+      lastname,
+      email,
+    });
+
+    return res.status(200).json({
+      status: "success",
+      data: {
+        user: {
+          id,
+          firstName: firstname,
+          lastName: lastname,
+          email,
+          accessToken: generatedToken,
+        },
+      },
+    });
   },
 
   async createUser(req: Request, res: Response) {

@@ -1,29 +1,26 @@
 import mongoose from "mongoose";
 
-const tagSchema = new mongoose.Schema(
+const cartSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-    },
-    type: {
+    owner: {
       type: String,
       required: true,
+      unique: true,
     },
-    text: {
-      type: String,
+    products: {
+      type: Array,
       required: true,
     },
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
-    collection: "tag",
+    collection: "cart",
   },
 );
 
-const Tag = mongoose.model("Tag", tagSchema);
+const Cart = mongoose.model("Cart", cartSchema);
 
-export default Tag;
+export default Cart;
 
 /**
  * @openapi

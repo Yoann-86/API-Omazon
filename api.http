@@ -95,3 +95,13 @@ Content-Type: application/json
     "email": "fake.user@email.com",
     "password": "azerty"
   }
+
+### LOGIN ###
+
+POST {{endpoint}}/login
+Content-Type: application/json
+
+{
+  "email": "dave.lopper@mail.com",
+  "password": "ilovereact"
+}
