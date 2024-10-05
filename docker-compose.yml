@@ -10,7 +10,7 @@ services:
       - "3000:3000"
     restart: always
     environment:
-      - DB_URI=${DB_URI}
+      - DB_URI=${MONGO_URL}
     networks:
       - omazon-network
     depends_on:
