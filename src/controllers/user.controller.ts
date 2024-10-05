@@ -102,15 +102,13 @@ const userController = {
     const verifiedPassword = await verifyPassword(user.password, password);
     if (!verifiedPassword) {
       return res
-        .status(401)
-        .json({ status: "error", message: "Invalid password" });
+        .status(400)
+        .json({ status: "error", message: "Invalid input" });
     }
 
     const result = await User.deleteOne({ email });
     if (result.deletedCount) {
-      return res
-        .status(204)
-        .json({ status: "success", message: "User deleted" });
+      return res.status(204).json({ status: "success" });
     }
     return res
       .status(404)

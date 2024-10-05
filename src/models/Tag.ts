@@ -20,3 +20,20 @@ const tagSchema = new mongoose.Schema(
 const Tag = mongoose.model("Tag", tagSchema);
 
 export default Tag;
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Tag:
+ *       type: object
+ *       properties:
+ *         type:
+ *           type: string
+ *           description: The type of the tag.
+ *           example: "best-seller"
+ *         text:
+ *           type: string
+ *           description: The text to display.
+ *           example: "N°1 des ventes"
+ */

@@ -49,3 +49,58 @@ router.get("/categories/:slug", (req, res, next) => {
 });
 
 export default router;
+
+/**
+ * @openapi
+ * /api/pictures/products/{slug}:
+ *  get:
+ *     tags: [Pictures]
+ *     summary: Get a picture of a product.
+ *     description:
+ *       Return the picture of a product.
+ *     parameters:
+ *     - in: path
+ *       name: slug
+ *     schema:
+ *      type: string
+ *      required: true
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           image/webp:
+ *             schema:
+ *               type: file
+ *
+ *       404:
+ *         description: NOT FOUND
+ *
+ *       500:
+ *         description: INTERNAL SERVER ERROR
+ *
+ * /api/pictures/categories/{slug}:
+ *  get:
+ *     tags: [Pictures]
+ *     summary: Get a picture of a category.
+ *     description:
+ *       Return the picture of a category.
+ *     parameters:
+ *     - in: path
+ *       name: slug
+ *     schema:
+ *      type: string
+ *      required: true
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           image/webp:
+ *             schema:
+ *               type: file
+ *
+ *       404:
+ *         description: NOT FOUND
+ *
+ *       500:
+ *         description: INTERNAL SERVER ERROR
+ */

@@ -11,7 +11,7 @@ router.patch("/:id", productController.methodNotAllowed);
 
 export default router;
 
-/**
+/** Swagger documentation
  * @openapi
  * /api/products:
  *  get:
@@ -207,19 +207,7 @@ export default router;
  *     responses:
  *       204:
  *         description: NO CONTENT
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   description: The status of the response.
- *                   example: "success"
- *                 message:
- *                   type: string
- *                   description: The message of the response.
- *                   example: "Product deleted"
+ *
  *       404:
  *         description: NOT FOUND
  *         content:

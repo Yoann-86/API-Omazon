@@ -3,22 +3,31 @@ import { Tag } from "../models";
 
 const tagController = {
   async getTags(req: Request, res: Response) {
-    if (req.query.id) {
-      const tag = await Tag.findById(req.query.id);
-      if (tag) {
-        return res.status(200).json({ status: "success", data: { tag } });
+    try {
+      if (req.query.id) {
+        const tag = await Tag.findById(req.query.id);
+        if (tag) {
+          return res.status(200).json({ status: "success", data: { tag } });
+        }
+        return res
+          .status(404)
+          .json({ status: "error", message: "Tag not found" });
       }
+
+      const tags = await Tag.find();
+      if (tags) {
+        return res.status(200).json({ status: "success", data: { tags } });
+      }
+
       return res
         .status(404)
-        .json({ status: "error", message: "Tag not found" });
+        .json({ status: "error", message: "No tags found" });
+    } catch (error) {
+      if (error instanceof Error)
+        return res
+          .status(500)
+          .json({ status: "error", message: error.message });
     }
-
-    const tags = await Tag.find();
-    if (tags) {
-      return res.status(200).json({ status: "success", data: { tags } });
-    }
-
-    return res.status(404).json({ status: "error", message: "No tags found" });
   },
 
   async createTag(req: Request, res: Response) {

@@ -93,7 +93,7 @@ const productController = {
       const result = await Product.deleteOne({ _id: id });
 
       if (result.deletedCount) {
-        return res.status(204);
+        return res.status(204).json({ status: "success" });
       }
 
       return res
